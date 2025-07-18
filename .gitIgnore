@@ -1,0 +1,9 @@
+# Virtual environment
+venv/
+
+# Generated output files
+# wallet_credit_scores.csv
+# score_distribution.png
+
+# Large input data file (optional, but recommended for large files)
+data/transactions.json
