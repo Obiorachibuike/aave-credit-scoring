@@ -1,21 +1,23 @@
 # Crypto Wallet Credit Scoring Project
 
-## Project Overview
+![Crypto Wallet](https://img.icons8.com/color/48/000000/bitcoin.png) ![Credit Score](https://img.icons8.com/color/48/000000/credit-score.png)
+
+## 📖 Project Overview
 This project develops a machine learning-based system to assign a "credit score" to cryptocurrency wallets. By analyzing on-chain transaction data, the system engineers various behavioral features and uses an XGBoost Regressor to predict a heuristic credit score, providing a quantitative measure of a wallet's activity and perceived reliability within a decentralized finance (DeFi) context.
 
 The goal is to demonstrate how historical on-chain data can be leveraged to infer behavioral patterns and assign a score, which could potentially be used in various DeFi applications (e.g., risk assessment for lending protocols).
 
-## Features
-- **Data Ingestion**: Loads transaction data from a JSON file.
-- **Feature Engineering**: Extracts meaningful features from raw transaction data, such as total transaction count, unique transaction types, time-based activity metrics, total deposited/borrowed/repaid values, net flows, and liquidation history.
-- **Heuristic Scoring**: Implements a rule-based system to assign a "ground truth" credit score (0-1000) based on observed wallet behaviors (e.g., penalizing liquidations, rewarding repayments). This serves as the target for the ML model.
-- **Model Training**: Trains an XGBoost Regressor model to learn the relationship between engineered features and the heuristic scores. Includes data splitting, feature scaling, and early stopping to prevent overfitting.
-- **Model Persistence**: Saves the trained model and necessary preprocessing scalers for future use.
-- **Credit Score Generation**: Uses the trained model to predict credit scores for new (or all) wallets.
-- **Results Export**: Exports the generated wallet scores to a CSV file.
-- **Visualization**: Generates a histogram to visualize the distribution of credit scores.
+## ⚙️ Features
+- 📥 **Data Ingestion**: Loads transaction data from a JSON file.
+- ⚙️ **Feature Engineering**: Extracts meaningful features from raw transaction data, such as total transaction count, unique transaction types, time-based activity metrics, total deposited/borrowed/repaid values, net flows, and liquidation history.
+- 📊 **Heuristic Scoring**: Implements a rule-based system to assign a "ground truth" credit score (0-1000) based on observed wallet behaviors (e.g., penalizing liquidations, rewarding repayments). This serves as the target for the ML model.
+- 🏋️ **Model Training**: Trains an XGBoost Regressor model to learn the relationship between engineered features and the heuristic scores. Includes data splitting, feature scaling, and early stopping to prevent overfitting.
+- 💾 **Model Persistence**: Saves the trained model and necessary preprocessing scalers for future use.
+- 🏦 **Credit Score Generation**: Uses the trained model to predict credit scores for new (or all) wallets.
+- 📤 **Results Export**: Exports the generated wallet scores to a CSV file.
+- 📈 **Visualization**: Generates a histogram to visualize the distribution of credit scores.
 
-## Project Structure
+## 📁 Project Structure
 ```
 .
 ├── data/
@@ -30,28 +32,28 @@ The goal is to demonstrate how historical on-chain data can be leveraged to infe
 │   └── score_generator.py      # Script for generating credit scores using the trained model
 ├── wallet_credit_scores.csv    # Output CSV file with wallet addresses and their scores
 ├── score_distribution.png      # Output plot showing the distribution of credit scores
-└── README.md                   # This README file
+├── README.md                   # This README file
 └── analyze.md                  # Detailed analysis of the project
 ```
 
-## Setup and Installation
+## 🛠️ Setup and Installation
 Follow these steps to set up and run the project:
 
-### Clone the Repository (or create the project structure manually):
+### 📥 Clone the Repository (or create the project structure manually):
 If you have a Git repository, clone it:
 ```bash
 git clone <your-repo-url>
 cd <your-repo-name>
 ```
-Otherwise, create the directory structure as shown above (`data/`, `src/`, `src/models/`).
+Otherwise, create the directory structure as shown above (data/, src/, src/models/).
 
-### Create a Virtual Environment:
+### 🐍 Create a Virtual Environment:
 It's highly recommended to use a virtual environment to manage dependencies.
 ```bash
 python -m venv venv
 ```
 
-### Activate the Virtual Environment:
+### 🔄 Activate the Virtual Environment:
 **Windows:**
 ```bash
 .\venv\Scripts\activate
@@ -62,14 +64,14 @@ source venv/bin/activate
 ```
 Your terminal prompt should now show `(venv)` indicating the virtual environment is active.
 
-### Install Dependencies:
+### 📦 Install Dependencies:
 Install the required Python libraries.
 ```bash
 pip install pandas scikit-learn xgboost matplotlib seaborn joblib
 ```
 **Note**: Ensure your XGBoost version is 2.1.0 or newer for compatibility with the provided scripts. Use `pip install --upgrade xgboost` to get the latest compatible version.
 
-### Place Transaction Data:
+### 📂 Place Transaction Data:
 Ensure your `transactions.json` file is placed inside the `data/` directory. This file should contain a list of transaction objects, similar to the provided sample:
 ```json
 [
@@ -100,19 +102,19 @@ Ensure your `transactions.json` file is placed inside the `data/` directory. Thi
 ```
 Note the use of `userWallet` for the wallet address, `action` for transaction type, and `timestamp` as a Unix epoch integer. The `value_usd` is derived from `actionData.amount` and `actionData.assetPriceUSD`, assuming 6 decimal places for tokens like USDC.
 
-## Usage
-### 1. Train the Model
+## 🚀 Usage
+### 1. 🏋️ Train the Model
 Navigate to the project root directory and run the training script:
 ```bash
 (venv) PS C:\Users\User\Downloads\Data Analysis> python src/train_model.py
 ```
 This script will:
-- Load `transactions.json`.
-- Engineer features for each wallet.
-- Assign heuristic scores.
-- Train the XGBoost Regressor.
-- Evaluate the model's performance (MAE, R²).
-- Save the trained model (`credit_score_model.pkl`), feature scaler (`feature_scaler.pkl`), output score scaler (`score_output_scaler.pkl`), and feature columns list (`feature_columns.pkl`) to the `src/models/` directory.
+- 📂 Load `transactions.json`.
+- 🔧 Engineer features for each wallet.
+- 🏷️ Assign heuristic scores.
+- 📈 Train the XGBoost Regressor.
+- 📊 Evaluate the model's performance (MAE, R²).
+- 💾 Save the trained model (`credit_score_model.pkl`), feature scaler (`feature_scaler.pkl`), output score scaler (`score_output_scaler.pkl`), and feature columns list (`feature_columns.pkl`) to the `src/models/` directory.
 
 You should see output similar to:
 ```
@@ -134,17 +136,17 @@ Model and scalers saved to src/models/
 Training process finished.
 ```
 
-### 2. Generate Credit Scores
+### 2. 📊 Generate Credit Scores
 Once the model is trained and saved, you can generate credit scores for all wallets:
 ```bash
 (venv) PS C:\Users\User\Downloads\Data Analysis> python src/score_generator.py
 ```
 This script will:
-- Load `transactions.json` and engineer features.
-- Load the pre-trained model and scalers from `src/models/`.
-- Predict credit scores for all wallets.
-- Save the results to `wallet_credit_scores.csv`.
-- Generate and save a distribution plot of the credit scores as `score_distribution.png`.
+- 📂 Load `transactions.json` and engineer features.
+- 📥 Load the pre-trained model and scalers from `src/models/`.
+- 📊 Predict credit scores for all wallets.
+- 📤 Save the results to `wallet_credit_scores.csv`.
+- 📈 Generate and save a distribution plot of the credit scores as `score_distribution.png`.
 
 You should see output similar to:
 ```
@@ -164,13 +166,19 @@ Score distribution graph saved to score_distribution.png
 Processing complete.
 ```
 
-## Results
+## 📈 Results
 After running `score_generator.py`, you will find two new files in your project root directory:
-- `wallet_credit_scores.csv`: A CSV file containing `wallet_address` and their corresponding `credit_score`.
-- `score_distribution.png`: A histogram visualizing the distribution of the generated credit scores across all wallets.
+- 📄 `wallet_credit_scores.csv`: A CSV file containing `wallet_address` and their corresponding `credit_score`.
+- 📊 `score_distribution.png`: A histogram visualizing the distribution of the generated credit scores across all wallets.
 
-## Contributing
+## 📊 Analysis
+A detailed analysis of the scored wallets will be provided in `analyze.md`. This will include:
+- Score distribution graph across ranges (0-100, 100-200, etc.).
+- Behavior of wallets in the lower score range.
+- Behavior of wallets in the higher score range.
+
+## 🤝 Contributing
 Contributions are welcome! If you have suggestions for improving the feature engineering, heuristic scoring, model performance, or any other aspect of the project, feel free to open an issue or submit a pull request.
 
-## License
+## 📜 License
 This project is open-source and available under the MIT License.
